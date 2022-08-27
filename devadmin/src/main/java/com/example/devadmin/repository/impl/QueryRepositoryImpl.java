@@ -13,7 +13,11 @@ public class QueryRepositoryImpl implements QueryRepository {
 
     @Override
     public String query(String queryString) {
-        jdbcTemplate.update(queryString);
-        return "yes";
+        if(queryString.startsWith("SELECT")){
+            System.out.println(jdbcTemplate.queryForList(queryString).toString());
+        } else {
+            jdbcTemplate.update(queryString);
+        }
+        return null;
     }
 }
